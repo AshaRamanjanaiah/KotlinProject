@@ -1,6 +1,6 @@
 package com.example.android.kotlinproject
 
-import com.example.android.kotlinproject.model.PetProperties
+import com.example.android.kotlinproject.model.PetOwnerInfo
 
 class MainPresenter(private var mainView: MainView?, private val mainInteractor: MainInteractor)
     : MainInteractor.OnFinishedListener {
@@ -10,7 +10,7 @@ class MainPresenter(private var mainView: MainView?, private val mainInteractor:
         mainInteractor.requestGetDataAPI(this)
     }
 
-    override fun onResultSuccess(arrUpdates: List<PetProperties>?) {
+    override fun onResultSuccess(arrUpdates: List<PetOwnerInfo>?) {
         mainView?.hideProgress()
         mainView?.setData(arrUpdates)
     }

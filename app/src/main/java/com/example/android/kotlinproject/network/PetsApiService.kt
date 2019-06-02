@@ -1,6 +1,6 @@
 package com.example.android.kotlinproject.network
 
-import com.example.android.kotlinproject.model.PetProperties
+import com.example.android.kotlinproject.model.PetOwnerInfo
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -15,7 +15,7 @@ private val retrofit = Retrofit.Builder()
 
 interface PetsApiService{
     @GET("people.json")
-    fun getPetsInfo(): Call<List<PetProperties>>
+    fun getPetsInfo(): Call<List<PetOwnerInfo>>
 }
 
 object PetsApi{
