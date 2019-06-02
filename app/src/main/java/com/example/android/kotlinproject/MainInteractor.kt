@@ -27,21 +27,21 @@ class MainInteractor {
         })
     }
 
-    fun getOwnersList(arrAllOwners: List<PetOwnerInfo>, gender: String): List<PetsInfo>{
+    fun getOwnersList(arrAllOwners: List<PetOwnerInfo>, gender: String): List<PetsInfo>?{
         var arrOwners = ArrayList<PetOwnerInfo>()
         for (i in arrAllOwners.indices) {
             if(arrAllOwners[i].gender.equals(gender)){
                 arrOwners.add(arrAllOwners[i])
             }
         }
-        var arrOwnersCats: ArrayList<PetsInfo>
+        var arrOwnersCats: ArrayList<PetsInfo>?
 
         arrOwnersCats = getCatsList(arrOwners)
 
         return arrOwnersCats
     }
 
-    fun getCatsList(arrOwners: ArrayList<PetOwnerInfo>): ArrayList<PetsInfo>{
+    fun getCatsList(arrOwners: ArrayList<PetOwnerInfo>): ArrayList<PetsInfo>?{
         var arrOwnersCats = ArrayList<PetsInfo>()
         for(i in arrOwners){
             if(i.pets != null) {

@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
         progressBar = findViewById(R.id.progress_bar)
 
-        var linearLayoutManagerMale = LinearLayoutManager(this)
+        val linearLayoutManagerMale = LinearLayoutManager(this)
         linearLayoutManagerMale.orientation = LinearLayoutManager.VERTICAL
 
         maleOwnerCatsRecyclerview = findViewById<RecyclerView>(R.id.rv_male_owner_cats).apply {
@@ -66,11 +66,11 @@ class MainActivity : AppCompatActivity(), MainView {
         var mainInteractor = MainInteractor()
         if (arrUpdates != null) {
 
-            var arrMaleOwnersCats : List<PetsInfo> = mainInteractor.getOwnersList(arrUpdates, MALE_OWNER)
-            var arrFemaleOwnersCats : List<PetsInfo> = mainInteractor.getOwnersList(arrUpdates, FEMALE_OWNER)
+            var arrMaleOwnersCats : List<PetsInfo>? = mainInteractor.getOwnersList(arrUpdates, MALE_OWNER)
+            var arrFemaleOwnersCats : List<PetsInfo>? = mainInteractor.getOwnersList(arrUpdates, FEMALE_OWNER)
 
-            var sortedListMaleOwnerCats = arrMaleOwnersCats.sortedWith(compareBy({ it.name }))
-            var sortedListFemaleOwnerCats = arrFemaleOwnersCats.sortedWith(compareBy({ it.name }))
+            var sortedListMaleOwnerCats = arrMaleOwnersCats!!.sortedWith(compareBy({ it.name }))
+            var sortedListFemaleOwnerCats = arrFemaleOwnersCats!!.sortedWith(compareBy({ it.name }))
 
 
             var viewAdapterMale = OwnerAndPetInfoAdapter(this, sortedListMaleOwnerCats)
