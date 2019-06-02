@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var mainPresenter: MainPresenter
 
-    private var myDataset: List<PetOwnerInfo>? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,11 +63,11 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun setData(arrUpdates: List<PetOwnerInfo>?) {
+        var mainInteractor = MainInteractor()
         if (arrUpdates != null) {
-            myDataset = arrUpdates
 
-            var arrMaleOwnersCats : List<PetsInfo> = getOwnersList(arrUpdates, MALE_OWNER)
-            var arrFemaleOwnersCats : List<PetsInfo> = getOwnersList(arrUpdates, FEMALE_OWNER)
+            var arrMaleOwnersCats : List<PetsInfo> = mainInteractor.getOwnersList(arrUpdates, MALE_OWNER)
+            var arrFemaleOwnersCats : List<PetsInfo> = mainInteractor.getOwnersList(arrUpdates, FEMALE_OWNER)
 
             var sortedListMaleOwnerCats = arrMaleOwnersCats.sortedWith(compareBy({ it.name }))
             var sortedListFemaleOwnerCats = arrFemaleOwnersCats.sortedWith(compareBy({ it.name }))
@@ -81,34 +79,6 @@ class MainActivity : AppCompatActivity(), MainView {
             var viewAdapterFemale = OwnerAndPetInfoAdapter(this, sortedListFemaleOwnerCats)
             femaleOwnerCatsRecyclerview.adapter = viewAdapterFemale
         }
-    }
-
-    fun getOwnersList(arrAllOwners: List<PetOwnerInfo>, gender: String): List<PetsInfo>{
-        var arrOwners = ArrayList<PetOwnerInfo>()
-        for (i in arrAllOwners.indices) {
-            if(arrAllOwners[i].gender.equals(gender)){
-                arrOwners.add(arrAllOwners[i])
-            }
-        }
-        var arrOwnersCats: ArrayList<PetsInfo>
-
-        arrOwnersCats = getCatsList(arrOwners)
-
-        return arrOwnersCats
-    }
-
-    fun getCatsList(arrOwners: ArrayList<PetOwnerInfo>): ArrayList<PetsInfo>{
-        var arrOwnersCats = ArrayList<PetsInfo>()
-        for(i in arrOwners){
-            if(i.pets != null) {
-                for (pet in i.pets) {
-                    if (pet.type.equals("Cat")) {
-                        arrOwnersCats.add(pet)
-                    }
-                }
-            }
-        }
-        return arrOwnersCats
     }
 
     override fun setDataError(strError: String) {
